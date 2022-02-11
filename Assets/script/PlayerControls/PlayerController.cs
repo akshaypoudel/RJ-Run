@@ -10,15 +10,15 @@ public class PlayerController : MonoBehaviour
     private SIDE enumSide=SIDE.Mid;
     [SerializeField]
     private float sidescrollSpeed;
-    private AudioSource CoinSoundEffect;
+    public AudioSource CoinSoundEffect;
     [SerializeField] private ParticleSystem CollectEffect=null;
     public GameObject PauseMenu;
     [SerializeField]
     private float moveSpeed;
     [SerializeField]
     private float jumpHeight;
-    private Animator animator;
-    private Rigidbody _rigidBody;
+    public Animator animator;
+    public Rigidbody _rigidBody;
 
     [SerializeField]
     private float ZPos;
@@ -45,21 +45,35 @@ public class PlayerController : MonoBehaviour
 
         [SerializeField]private float swipeRange;
         [SerializeField]private float jumpRange;
+    [SerializeField] private float rollSpeed;
         [SerializeField]private float tapRange;
     #endregion
     //FUNCTIONS
     void Start()
     {
-        //public GameObject NewObject;
-        animator=GetComponent<Animator>();
-        _rigidBody=GetComponent<Rigidbody>();
         NewXPos=0f;
-        CoinSoundEffect=GameObject.Find("DonutSFX").GetComponent<AudioSource>();
     }
     void Update()
-    {
+    { 
+#if UNITY_EDITOR
+        StandAloneInput();
+        if((Input.GetKeyDown(KeyCode.UpArrow)) && isGrounded)
+        {
+            AndroidJump();  
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow) && !isGrounded) 
+        {
+            Roll();
+        }
+#elif UNITY_ANDROID
         MobileControls();
+#endif
         MovePlayer();
+    }
+    private void Roll()
+    {
+
+        _rigidBody.AddForce(Vector3.down*rollSpeed,ForceMode.Impulse);
     }
     private void MobileControls()
     {
@@ -149,7 +163,8 @@ public class PlayerController : MonoBehaviour
             isGrounded=true;
         }
     }
-    private void OnTriggerEnter(Collider other) {
+    private void OnTriggerEnter(Collider other) 
+    {
         if(other.gameObject.CompareTag("Coin"))
         {
             if(CoinSoundEffect!=null)
@@ -162,34 +177,34 @@ public class PlayerController : MonoBehaviour
     }
     private void StandAloneInput()
     {
-        //     swiptRight=Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow);
-        //     swiptLeft=Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow);
-        //     if(swiptRight)
-        //     {
-        //         if(enumSide==SIDE.Mid)
-        //         {
-        //             NewXPos= -ZPos;
-        //             enumSide=SIDE.Left;
-        //         }
-        //         else if(enumSide==SIDE.Right)
-        //         {
-        //             NewXPos=0;
-        //             enumSide=SIDE.Mid;
-        //         }
-        //     }
-        //     else if(swiptLeft)
-        //     {
-        //         if(enumSide==SIDE.Mid)
-        //         { 
-        //             NewXPos=ZPos;
-        //             enumSide=SIDE.Right;
-        //         }
-        //         else if(enumSide==SIDE.Left)
-        //         {
-        //             NewXPos=0;
-        //             enumSide=SIDE.Mid;
-        //         }
-        //     }
+             swiptRight=Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow);
+             swiptLeft=Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow);
+             if(swiptRight)
+             {
+                 if(enumSide==SIDE.Mid)
+                 {
+                     NewXPos= -ZPos;
+                     enumSide=SIDE.Left;
+                 }
+                 else if(enumSide==SIDE.Right)
+                 {
+                     NewXPos=0;
+                     enumSide=SIDE.Mid;
+                 }
+             }
+             else if(swiptLeft)
+             {
+                 if(enumSide==SIDE.Mid)
+                 { 
+                     NewXPos=ZPos;
+                     enumSide=SIDE.Right;
+                 }
+                 else if(enumSide==SIDE.Left)
+                 {
+                     NewXPos=0;
+                     enumSide=SIDE.Mid;
+                 }
+             }
     }
 
 }

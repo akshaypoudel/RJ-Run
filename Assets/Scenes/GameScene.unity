@@ -1648,6 +1648,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3d32c9ad2466dbb48b1228ae9bb040c6, type: 3}
+--- !u!82 &448943016167302173 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 448943016381963316, guid: 3d32c9ad2466dbb48b1228ae9bb040c6,
+    type: 3}
+  m_PrefabInstance: {fileID: 448943016167302172}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &455256945551859054
 GameObject:
   m_ObjectHideFlags: 0
@@ -1919,16 +1925,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sidescrollSpeed: 14
+  CoinSoundEffect: {fileID: 448943016167302173}
   CollectEffect: {fileID: 3781946150560534746}
   PauseMenu: {fileID: 621843708}
   moveSpeed: 6
   jumpHeight: 2.53
+  animator: {fileID: 5866666020107644503}
+  _rigidBody: {fileID: 919132147738177178}
   ZPos: 2
   speedIncreaser: 0.0004
   distanceToIncreaseSpeed: 70
   maxSpeedToIncrease: 8.5
   swipeRange: 100
   jumpRange: 50
+  rollSpeed: 100
   tapRange: 20
 --- !u!136 &919132147738177177
 CapsuleCollider:

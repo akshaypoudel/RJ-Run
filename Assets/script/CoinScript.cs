@@ -30,8 +30,6 @@ public class CoinScript : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         if(other.gameObject.tag=="Player")
         {
-
-            // coinCollectEffect.Play();
             ++coins;
             ++donut;
             PlayerPrefs.SetInt("Donut",donut);
