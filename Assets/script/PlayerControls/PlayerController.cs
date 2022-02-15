@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
     private float jumpHeight;
     public Animator animator;
     public Rigidbody _rigidBody;
+    public CapsuleCollider rjCollider;
+    public AnimationClip anim;
 
     [SerializeField]
     private float ZPos;
@@ -27,6 +29,16 @@ public class PlayerController : MonoBehaviour
     private bool swiptRight;
     private bool swiptLeft;
     private bool isGrounded=true;
+    private bool isJumping=false;
+
+    public float colliderHeightWhenRolling;
+    public float normalHeight;
+    public Vector3 normalPosition;
+    public Vector3 colliderYPosWhenRolling;
+
+
+
+    private bool isRolling = true;
     [SerializeField]
     private float speedIncreaser; // how much speed would increase every frame 
     [SerializeField]
@@ -51,29 +63,40 @@ public class PlayerController : MonoBehaviour
     //FUNCTIONS
     void Start()
     {
+        isRolling = false;
         NewXPos=0f;
     }
     void Update()
     { 
-#if UNITY_EDITOR
         StandAloneInput();
-        if((Input.GetKeyDown(KeyCode.UpArrow)) && isGrounded)
+        if((Input.GetKeyDown(KeyCode.UpArrow)) && isGrounded && !isRolling && !isJumping)
         {
+            isJumping = true;
             AndroidJump();  
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow) && !isGrounded) 
+        if (Input.GetKeyDown(KeyCode.DownArrow) && isGrounded && !isRolling) 
         {
+            isRolling = true;
+            
             Roll();
+            
         }
-#elif UNITY_ANDROID
-        MobileControls();
-#endif
+        //MobileControls();
         MovePlayer();
     }
     private void Roll()
     {
-
-        _rigidBody.AddForce(Vector3.down*rollSpeed,ForceMode.Impulse);
+        rjCollider.height = colliderHeightWhenRolling;
+        rjCollider.center = colliderYPosWhenRolling;
+        animator.SetTrigger("Roll");
+        StartCoroutine(BackToNormal());
+    }
+    private IEnumerator BackToNormal()
+    {
+        yield return new WaitForSeconds(1.2f);
+        isRolling = false;
+        rjCollider.height = normalHeight;
+        rjCollider.center = normalPosition;
     }
     private void MobileControls()
     {
@@ -144,8 +167,14 @@ public class PlayerController : MonoBehaviour
     private void AndroidJump()
     {
         isGrounded=false;
-        animator.SetTrigger("Jumping");
+        animator.SetTrigger("isJumping");
         _rigidBody.AddForce(Vector3.up*jumpHeight*2,ForceMode.VelocityChange);
+        StartCoroutine(WaitAfterJump());
+    }
+    IEnumerator WaitAfterJump()
+    {
+        yield return new WaitForSeconds(1f);
+        isJumping=false;
     }
     private void MovePlayer()
     {

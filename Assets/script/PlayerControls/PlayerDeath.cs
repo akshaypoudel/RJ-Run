@@ -17,7 +17,11 @@ public class PlayerDeath : MonoBehaviour
         animator=GetComponent<Animator>();
     }
     private void OnCollisionEnter(Collision other) {
-        if(other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Car"))
+        if(other.gameObject.CompareTag("Enemy"))
+        {
+            StartCoroutine(ReloadGame());
+        }
+        if (other.gameObject.CompareTag("Car"))
         {
             StartCoroutine(ReloadGame());
         }

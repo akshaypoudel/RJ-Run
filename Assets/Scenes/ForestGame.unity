@@ -18665,16 +18665,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sidescrollSpeed: 14
+  CoinSoundEffect: {fileID: 0}
   CollectEffect: {fileID: 1006252354}
   PauseMenu: {fileID: 186536657}
   moveSpeed: 6
   jumpHeight: 2.56
+  animator: {fileID: 7026695880847301368}
+  _rigidBody: {fileID: 4334761734273702453}
   ZPos: 2
   speedIncreaser: 0.0004
   distanceToIncreaseSpeed: 50
   maxSpeedToIncrease: 8.5
   swipeRange: 100
   jumpRange: 50
+  rollSpeed: 0
   tapRange: 20
 --- !u!1 &4334761734273702456
 GameObject:
