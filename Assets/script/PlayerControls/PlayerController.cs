@@ -7,7 +7,6 @@ public enum SIDE { Left,Mid,Right}
 public class PlayerController : MonoBehaviour
 {
     #region StandaloneInput
-    private SIDE enumSide=SIDE.Mid;
     [SerializeField]
     private float sidescrollSpeed;
     public AudioSource CoinSoundEffect;
@@ -25,9 +24,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float ZPos;
     private float NewXPos=0f;
+    private SIDE enumSide=SIDE.Mid;
     
     private bool swiptRight;
     private bool swiptLeft;
+
+
     private bool isGrounded=true;
     private bool isJumping=false;
 
@@ -57,7 +59,7 @@ public class PlayerController : MonoBehaviour
 
         [SerializeField]private float swipeRange;
         [SerializeField]private float jumpRange;
-    [SerializeField] private float rollSpeed;
+        [SerializeField] private float rollSpeed;
         [SerializeField]private float tapRange;
     #endregion
     //FUNCTIONS
@@ -69,7 +71,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     { 
         StandAloneInput();
-        if((Input.GetKeyDown(KeyCode.UpArrow)) && isGrounded && !isRolling && !isJumping)
+        if((Input.GetKeyDown(KeyCode.Space)) && isGrounded &&!isRolling && !isJumping)
         {
             isJumping = true;
             AndroidJump();  
@@ -81,7 +83,6 @@ public class PlayerController : MonoBehaviour
             Roll();
             
         }
-        //MobileControls();
         MovePlayer();
     }
     private void Roll()

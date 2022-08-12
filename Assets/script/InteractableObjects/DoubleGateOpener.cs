@@ -9,20 +9,10 @@ public class DoubleGateOpener : MonoBehaviour
     public float speed=10f;
     public GameObject leftGate;
     public GameObject rightGate;
-    private GameObject Gate;
-    Quaternion leftGateRotation=Quaternion.Euler(0,-90,0);
-    Quaternion rightGateRotation=Quaternion.Euler(0,90,0);
-    // bool canRight=true,canLeft=true;
 
     private void Start() {
         Player=GameObject.Find("Player").transform;
-        // Gate=GameObject.Find("Gates");
-        // leftGate=Gate.transform.GetChild(0).gameObject;
-        // rightGate=Gate.transform.GetChild(1).gameObject;
     }
-
-
-    // Update is called once per frame
     void FixedUpdate()
     {
         if(Player.position.x>=transform.position.x-distanceFromPlayer)
@@ -43,14 +33,10 @@ public class DoubleGateOpener : MonoBehaviour
             }
 
         }
-        // else if(Player.position.x<=transform.position.x+(distanceFromPlayer+10f))
-        // {
-        //     Destroy(this.gameObject);
-        // }
         if(Player.position.x>=transform.position.x+10)
         {
-            if(this.gameObject!=null)
-                Destroy(this.gameObject);
+            if (this.gameObject != null)
+                this.gameObject.SetActive(false);
         }
         
     }

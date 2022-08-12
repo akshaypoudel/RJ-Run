@@ -69,7 +69,4 @@ public class GroundSpawner2 : MonoBehaviour
             list.Add(Rand);
         }
     }
-
-
-
 }

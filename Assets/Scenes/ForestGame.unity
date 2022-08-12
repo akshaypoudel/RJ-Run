@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 854290180}
-  m_IndirectSpecularColor: {r: 0.007999092, g: 0.029706959, b: 0.1552321, a: 1}
+  m_IndirectSpecularColor: {r: 0.008091654, g: 0.029750269, b: 0.15445656, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -18672,7 +18672,13 @@ MonoBehaviour:
   jumpHeight: 2.56
   animator: {fileID: 7026695880847301368}
   _rigidBody: {fileID: 4334761734273702453}
+  rjCollider: {fileID: 0}
+  anim: {fileID: 0}
   ZPos: 2
+  colliderHeightWhenRolling: 0
+  normalHeight: 0
+  normalPosition: {x: 0, y: 0, z: 0}
+  colliderYPosWhenRolling: {x: 0, y: 0, z: 0}
   speedIncreaser: 0.0004
   distanceToIncreaseSpeed: 50
   maxSpeedToIncrease: 8.5
@@ -18694,6 +18700,7 @@ GameObject:
   - component: {fileID: 4334761734273702454}
   - component: {fileID: 4334761734273702455}
   - component: {fileID: 2312690886322852599}
+  - component: {fileID: 4334761734273702457}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -18701,6 +18708,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &4334761734273702457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4334761734273702456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf1574c4a25019d42a572fec852deb30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outputText: {fileID: 0}
+  swipeRange: 100
+  tapRange: 0
 --- !u!4 &4395353489356615052
 Transform:
   m_ObjectHideFlags: 0

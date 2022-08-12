@@ -9,7 +9,7 @@ public class AudioManager : MonoBehaviour
     public AudioSource BackGroundAudio;
     public AudioSource[] SoundEffects;
     private void Awake() {
-        if(BackGroundAudio==null)
+        if(BackGroundAudio!=null)
         {
             BGMusic=GameObject.FindWithTag("Audio");
             BackGroundAudio=BGMusic.GetComponent<AudioSource>();

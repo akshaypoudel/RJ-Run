@@ -7,8 +7,10 @@ public class GateOpener : MonoBehaviour
     private Transform Player;
     public float distanceFromPlayer;
     public float speed;
-    private void Start() {
-        Player=GameObject.Find("Player").transform;
+
+    private void Start() 
+    {
+        Player=GameObject.Find("Player").transform;    
     }
 
     void Update()
